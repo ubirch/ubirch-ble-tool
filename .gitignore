@@ -22,4 +22,4 @@ re-ubirch-tol-files
 build
 dist
 
-.pyc
+*.pyc
