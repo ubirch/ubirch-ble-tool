@@ -2,6 +2,7 @@
 cmake-*
 BUILD
 mbed_settings.pyc
+*.pyc
 .temp
 Debug
 .cproject
@@ -21,5 +22,3 @@ ubirch_ble_tool.egg-info
 re-ubirch-tol-files
 build
 dist
-
-*.pyc

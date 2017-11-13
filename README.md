@@ -29,7 +29,9 @@ Install the [PyBLEWrapper](https://github.com/brettchien/PyBLEWrapper)
 pip install -U git+https://github.com/brettchien/PyBLEWrapper.git
 ```
 
-run `python setup.py install` to install ``ubirch-ble-tool``
+## Installing
+
+To install `ubirch-ble-tool run` ```pip install -U git+https://github.com/ubirch/ubirch-ble-tool.git```
 
 # License
 
