@@ -1,6 +1,8 @@
 from bleSuite import bleConnectionManager, bleServiceManager
 from bluepy.btle import Scanner
 
+from ubirch.linux.bleServiceManager import BLEServiceManager
+
 
 class BLEManager(object):
     """ BLE network manager """
@@ -9,6 +11,7 @@ class BLEManager(object):
         """ Create an instance of BLE Manager """
         self.address = address
         self.cm = bleConnectionManager.BLEConnectionManager(address, adapter, addressType, securityLevel)
+        self.sm = BLEServiceManager(self.cm, self.address)
 
     def connectDevice(self):
         """ conect tot he BLE device
@@ -47,10 +50,43 @@ class BLEManager(object):
         bleServiceManager.bleServiceWriteToHandle(self.cm, handle, data)
 
     def read(self, handle):
+        # TODO add a function getHandlebyUUID toget handle using uuid
+        # helps to read data on both mac n linux with ease
         return bleServiceManager.bleServiceReadByHandle(self.cm, handle)
 
     def isConnected(self):
         return self.cm.isConnected()
+
+
+    # Services and Characteristics
+
+    def bleServiceWriteToHandle(self, handle, data):
+        return bleServiceManager.bleServiceWriteToHandle(self.cm, handle, data)
+
+    def bleServiceReadByHandle(self, handle):
+        return bleServiceManager.bleServiceReadByHandle(self.cm, handle)
+
+    def bleServiceReadByUUID(self, uuid):
+        return bleServiceManager.bleServiceReadByUUID(self.cm, uuid)
+
+    def bleDiscoverServices(self):
+        return bleServiceManager.bleServiceDiscovery(self.address, self.cm)
+
+    def showServices(self):
+        bledevice = bleServiceManager.bleServiceDiscovery(self.address, self.cm)
+        bledevice.printDeviceStructure()
+
+    def bleGetHandlefromUUID(self, uuid):
+        bledevice = bleServiceManager.bleServiceDiscovery(self.address, self.cm)
+
+        for service in bledevice.services:
+            # print service.uuid
+            for characteristic in service.characteristics:
+                # print characteristic.uuid
+                if uuid == characteristic.uuid:
+                    return characteristic.valueHandle
+
+        return -1
 
 
 class BLEScanDevices(object):

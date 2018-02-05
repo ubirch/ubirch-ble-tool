@@ -1,1 +1,1 @@
-from ble_platform import get_manager, get_scanner
+from ble_platform import get_manager, get_scanner, get_service_manager
