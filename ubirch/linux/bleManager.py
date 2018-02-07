@@ -88,6 +88,9 @@ class BLEManager(object):
 
         return -1
 
+    def bleServiceWriteByUUID(self, uuid, data):
+        handle = self.bleGetHandlefromUUID(uuid)
+        return self.bleServiceWriteToHandle(handle, data)
 
 class BLEScanDevices(object):
 

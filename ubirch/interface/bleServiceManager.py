@@ -6,6 +6,9 @@ class BLEServiceManager:
     def bleServiceWriteToHandle(connectionManager, handle, data):
         pass
 
+    def bleServiceWriteByUUID(connectionManager, uuid, data):
+        pass
+
     def bleServiceReadByHandle(connectionManager, handle):
         pass
 
